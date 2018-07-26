@@ -1,6 +1,7 @@
+function [warped] = timeWarping(slowerWav, fasterWav)
 % Load two speech waveforms of the same utterance (from TIMIT)
-[slow, fs] = audioread('0001.wav');
-[fast, fs] = audioread('chunk001.wav');
+[slow, fs] = audioread(slowerWav);
+[fast, fs] = audioread(fasterWav);
 
 windowSize = 1024;
 noverlap = 768;
@@ -25,9 +26,11 @@ for i = 1:length(D2i1); D2i1(i) = wp2(min(find(wp1 >= i))); end
 D2x = pvsample(fastSTFT, D2i1-1, windowSize);
 
 % Invert it back to time domain
-what = invspecgram(D2x, windowSize, noverlap, nfft, fs); % (signal, window, noverlap, nfft, fs)
+new_wav = invspecgram(D2x, windowSize, noverlap, nfft, fs); % (signal, window, noverlap, nfft, fs)
 
-out = zeros(length(slow),1);
-[row,col] = size(what);
-out(1:row,1:col) = what;
-audiowrite('dtwchunk001.wav', out, fs)
+%equal length
+warped = zeros(length(slow),1);
+[row,col] = size(new_wav);
+warped(1:row,1:col) = new_wav;
+%audiowrite('dtwchunk001.wav', out, fs)
+end
