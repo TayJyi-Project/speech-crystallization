@@ -1,0 +1,8 @@
+1. 將原始資料放到 VC --> Training --> Source 資料夾；轉換後的資料放到 VC --> Training --> Target 資料夾
+2. 使用 matlab 開啟 AutoList_v2.m 並執行，會在 VC --> List 資料夾產生出兩個 list 檔案
+3. 使用 matlab 開啟 All_Proc_Matlab_Python_VC.m 並執行，評估結果會顯示在 matlab console 
+
+
+P.S.
+LSD 越小越好
+STOI 越大越好
